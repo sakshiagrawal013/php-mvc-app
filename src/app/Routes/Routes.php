@@ -18,16 +18,14 @@ use League\Container\Container;
 class Routes
 {
     private RequestInterface $request;
-    private Container $container;
 
     /**
      * Routes constructor.
      * @param RequestInterface $request
      */
-    public function __construct(RequestInterface $request, $container)
+    public function __construct(RequestInterface $request)
     {
         $this->request = $request;
-        $this->container = $container;
     }
 
     /**
@@ -71,11 +69,16 @@ class Routes
      */
     private function callRoute(array $matcher, array $requests): void
     {
+        global $container;
         $className = 'App\Controllers\\' . $matcher['controller'];
 
-        $controller = $this->container->get($className);
+        try {
+            $controller = $container->get($className);
+        } catch (\Exception $exception)
+        {
+            $controller = new $className();
+        }
 
-        //$controller = new $className();
         call_user_func_array(array($controller, $matcher['method']), $requests);
     }
 }

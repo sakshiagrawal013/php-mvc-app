@@ -11,7 +11,6 @@ class User extends Model implements UserInterface
     public int $id;
     public string $email;
     protected string $table = 'Users';
-    private string $password;
 
     /**
      * @param string $email
@@ -35,7 +34,7 @@ class User extends Model implements UserInterface
      */
     public function verifyPassword(string $password): bool
     {
-        return password_verify($password, $this->password);
+        return password_verify($password, $this->get($this->id)->password);
     }
 
     /**
