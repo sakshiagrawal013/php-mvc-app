@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        backupStaticAttributes="false"
+        bootstrap="./bootstrap.php"
+        cacheTokens="false"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="false"
+        processIsolation="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        verbose="false">
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>./tests/Units</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+    <env name="DB_DATABASE_NAME" value="blog_testing"/>
+    </php>
+</phpunit>
